@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: cloud-frame-zipkin(链路追踪服务)
