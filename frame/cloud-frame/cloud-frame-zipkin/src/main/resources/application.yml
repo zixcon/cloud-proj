@@ -1,5 +1,9 @@
 server:
   port: 9411
+  undertow:
+    accesslog:
+      enabled: true
+
 
 #spring:
 #  cloud:
