@@ -14,4 +14,9 @@
 
     <name>${project.artifactId}</name>
 
+    <modules>
+        <module>cloud-frame-demo-provider</module>
+        <module>cloud-frame-demo-consumer</module>
+    </modules>
+
 </project>
