@@ -24,14 +24,21 @@
         <java.version>1.8</java.version>
         <spring.cloud.version>Finchley.M8</spring.cloud.version>
         <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
+        <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
         <!--<spring-boot-admin.version>1.5.7</spring-boot-admin.version>-->
     </properties>
 
     <modules>
+        <!-- 注册中心 (eureka) -->
         <module>cloud-frame-register</module>
+        <!-- 配置中心 (config) -->
         <module>cloud-frame-config</module>
+        <!-- 网关中心 (zuul) -->
         <module>cloud-frame-gateway</module>
+        <!-- 监控中心 (Turbine + Hystrix) -->
         <module>cloud-frame-monitor</module>
+        <module>cloud-frame-demo</module>
+        <!-- 分布式链路日志采集中心 (zipkin) -->
         <!--<module>cloud-frame-zipkin</module>-->
     </modules>
     <dependencies>
@@ -57,7 +64,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--<dependency>
+            <dependency>
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-server</artifactId>
                 <version>${spring-boot-admin.version}</version>
@@ -81,7 +88,7 @@
                 <groupId>de.codecentric</groupId>
                 <artifactId>spring-boot-admin-server-ui-login</artifactId>
                 <version>${spring-boot-admin.version}</version>
-            </dependency>-->
+            </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -107,6 +114,13 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-sleuth</artifactId>
                 <version>2.0.0.M9</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-openfeign</artifactId>
+                <version>2.0.0.M2</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

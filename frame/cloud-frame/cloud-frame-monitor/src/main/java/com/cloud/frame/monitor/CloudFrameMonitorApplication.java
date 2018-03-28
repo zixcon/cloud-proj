@@ -11,6 +11,7 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
 @EnableHystrix
 @EnableHystrixDashboard
 @EnableDiscoveryClient
+//@EnableAdminServer
 @SpringBootApplication
 public class CloudFrameMonitorApplication {
 

@@ -1,22 +1,33 @@
 server:
   port: 8765
 
-info:
-  component: Zuul Server
+#info:
+#  component: Zuul Server
 
-endpoints:
-  restart:
-    enabled: true
-  shutdown:
-    enabled: true
-  health:
-    sensitive: false
+#endpoints:
+#  restart:
+#    enabled: true
+#  shutdown:
+#    enabled: true
+#  health:
+#    sensitive: false
 
 zuul:
   routes:
     stores: /stores/**
     customers: /customers/**
     zuulserver: /self/**
+
+eureka:
+  instance:
+    hostname: registry
+    prefer-ip-address: true
+#    metadata-map:
+#      user.name: ${security.user.name}
+#      user.password: ${security.user.password}
+  client:
+    service-url:
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
 
 logging:
   level:
