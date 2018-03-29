@@ -11,21 +11,26 @@ endpoints:
 
 eureka:
   instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
     hostname: registry
     prefer-ip-address: true
 #    metadata-map:
 #      user.name: ${security.user.name}
 #      user.password: ${security.user.password}
   client:
+    registryFetchIntervalSeconds: 5
     service-url:
       defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
 
 ## 默认hystrix禁用
-#ribbon:
+ribbon:
 ##请求处理的超时时间
-#  ReadTimeout: 120000
+  ReadTimeout: 10000
 ##请求连接的超时时间
-#  ConnectTimeout: 30000
+  ConnectTimeout: 5000
+  MaxAutoRetries: 0
+  MaxAutoRetriesNextServer: 1
 
 # 不配置则FeignClient的callback不起作用
 feign:

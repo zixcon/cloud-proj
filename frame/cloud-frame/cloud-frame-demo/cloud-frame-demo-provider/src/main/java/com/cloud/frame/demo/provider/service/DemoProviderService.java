@@ -27,7 +27,7 @@ public class DemoProviderService {
     }
 
     /**
-     * 当random的数字大于某值时,线程睡8秒,然后抛出一个运行时异常
+     * 当random的数字大于某值时,线程睡n秒,然后抛出一个运行时异常
      *
      * @return
      * @throws Exception
@@ -37,7 +37,7 @@ public class DemoProviderService {
         System.out.println("calling desireNumber()");
         if (Math.random() > .5) {
             Thread.sleep(1000 * n);
-            throw new RuntimeException("Boom");
+            //throw new RuntimeException("Boom");
         }
         return 1;
     }
