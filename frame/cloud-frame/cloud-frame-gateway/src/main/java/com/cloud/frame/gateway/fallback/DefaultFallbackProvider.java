@@ -46,7 +46,8 @@ public class DefaultFallbackProvider implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("fallback".getBytes());
+                String fall = "{'result':false,'errCode':'-1','message':'fallback:" + throwable.getMessage() + "'}";
+                return new ByteArrayInputStream(fall.getBytes());
             }
 
             @Override

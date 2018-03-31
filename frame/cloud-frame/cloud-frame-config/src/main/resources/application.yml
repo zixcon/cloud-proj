@@ -32,7 +32,7 @@ spring:
 #    name: user
 #    password: ${CONFIG_SERVER_PASSWORD:password}
 
-#server:
+#service:
 #  port: 8888
 #
 #management:
@@ -52,7 +52,7 @@ spring:
 #spring:
 #  cloud:
 #    config:
-#      server:
+#      service:
 #        git:
 #          uri: https://github.com/spring-cloud-samples/config-repo
 #          basedir: target/config

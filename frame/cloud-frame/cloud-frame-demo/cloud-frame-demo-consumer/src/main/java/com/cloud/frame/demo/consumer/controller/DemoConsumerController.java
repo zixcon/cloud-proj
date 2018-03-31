@@ -32,6 +32,18 @@ public class DemoConsumerController {
         return demoProviderClient1.hello();
     }
 
+    @GetMapping("/hello/do")
+    public String helloDo() {
+        String hello = demoProviderClient2.hello();
+        String result = "sdf";
+        return result + hello;
+    }
+
+    @GetMapping("/zuul/hello")
+    public String zuulHello() {
+        return demoProviderClient2.zuulHello();
+    }
+
     @GetMapping("/boom")
     public Integer desireNumber(Integer n) throws Exception {
         return demoProviderClient2.desireNumber(n);

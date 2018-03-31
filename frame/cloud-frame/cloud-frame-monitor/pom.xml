@@ -59,11 +59,11 @@
         </dependency>
         <!--<dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server</artifactId>
+            <artifactId>spring-boot-adservicerver</artifactId>
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui</artifactId>
+            <artifactId>spring-boot-adservicerver-ui</artifactId>
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
@@ -71,11 +71,11 @@
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui-turbine</artifactId>
+            <artifactId>spring-boot-adservicerver-ui-turbine</artifactId>
         </dependency>
         <dependency>
             <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-server-ui-login</artifactId>
+            <artifactId>spring-boot-adservicerver-ui-login</artifactId>
         </dependency>-->
     </dependencies>
 

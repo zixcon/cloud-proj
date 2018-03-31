@@ -27,4 +27,5 @@ public interface DemoProviderClient1 {
     @RequestMapping(value = "/demo/provider/hello", method = GET)
     String hello();
 
+
 }

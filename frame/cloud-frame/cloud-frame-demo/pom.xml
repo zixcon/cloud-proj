@@ -15,8 +15,10 @@
     <name>${project.artifactId}</name>
 
     <modules>
+        <module>cloud-frame-demo-common-beans</module>
         <module>cloud-frame-demo-provider</module>
         <module>cloud-frame-demo-consumer</module>
+        <module>cloud-frame-demo-auth</module>
     </modules>
 
 </project>

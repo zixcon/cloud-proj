@@ -25,6 +25,7 @@
         <spring.cloud.version>Finchley.M8</spring.cloud.version>
         <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
         <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
+        <security-oauth2.version>2.3.0.RELEASE</security-oauth2.version>
         <!--<spring-boot-admin.version>1.5.7</spring-boot-admin.version>-->
     </properties>
 
@@ -72,27 +73,27 @@
             </dependency>
             <!--<dependency>
                 <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server</artifactId>
+                <artifactId>spring-boot-adservicerver</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>
             <dependency>
                 <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui</artifactId>
+                <artifactId>spring-boot-adservicerver-ui</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>
             <dependency>
                 <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui-hystrix</artifactId>
+                <artifactId>spring-boot-adservicerver-ui-hystrix</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>
             <dependency>
                 <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui-turbine</artifactId>
+                <artifactId>spring-boot-adservicerver-ui-turbine</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>
             <dependency>
                 <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-server-ui-login</artifactId>
+                <artifactId>spring-boot-adservicerver-ui-login</artifactId>
                 <version>${spring-boot-admin.version}</version>
             </dependency>-->
             <dependency>
@@ -129,6 +130,17 @@
                 <version>2.0.0.M2</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.20</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

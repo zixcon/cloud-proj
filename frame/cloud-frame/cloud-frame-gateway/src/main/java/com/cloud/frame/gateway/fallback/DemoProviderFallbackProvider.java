@@ -46,7 +46,8 @@ public class DemoProviderFallbackProvider implements FallbackProvider {
 
             @Override
             public InputStream getBody() throws IOException {
-                return new ByteArrayInputStream("fallback provider".getBytes());
+                String fall = "{'result':false,'errCode':'-1','message':'fallback provider:" + throwable.getMessage() + "'}";
+                return new ByteArrayInputStream(fall.getBytes());
             }
 
             @Override

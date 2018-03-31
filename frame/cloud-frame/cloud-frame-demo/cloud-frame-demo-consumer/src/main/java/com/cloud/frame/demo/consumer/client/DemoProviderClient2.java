@@ -15,4 +15,14 @@ public interface DemoProviderClient2 {
 
     @RequestMapping(value = "/demo/provider/boom", method = GET)
     Integer desireNumber(@RequestParam(value = "n", defaultValue = "0") Integer n) throws Exception;
+
+    /**
+     * 不推荐从zuul网关进行微服务之间的调用
+     * @return
+     */
+    @RequestMapping(value = "/api/demo/provider/hello", method = GET)
+    String zuulHello();
+
+    @RequestMapping(value = "/demo/provider/hello", method = GET)
+    String hello();
 }
