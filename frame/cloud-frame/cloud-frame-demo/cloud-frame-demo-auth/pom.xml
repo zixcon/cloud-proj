@@ -5,7 +5,7 @@
 
 	<groupId>com.cloud.frame.demo.auth</groupId>
 	<artifactId>cloud-frame-demo-auth</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
 	<name>cloud-frame-demo-auth</name>
@@ -23,6 +23,11 @@
 			<artifactId>cloud-frame-demo-common-beans</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring-boot-starter</artifactId>
+		</dependency>
+
 		<!-- security+spring cloud oauth2+Redis -->
 		<!-- OAUTH2.0涉及到的数据库表有详细说明：http://andaily.com/spring-oauth-server/db_table_description.html -->
 		<dependency>

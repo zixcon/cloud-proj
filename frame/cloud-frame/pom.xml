@@ -15,7 +15,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/> <!-- lookup parent fentitytory -->
     </parent>
 
     <properties>
@@ -26,6 +26,8 @@
         <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
         <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
         <security-oauth2.version>2.3.0.RELEASE</security-oauth2.version>
+        <docker.plugin.version>0.4.12</docker.plugin.version>
+        <docker.image.prefix>cloud-frame</docker.image.prefix>
         <!--<spring-boot-admin.version>1.5.7</spring-boot-admin.version>-->
     </properties>
 
@@ -136,11 +138,26 @@
                 <artifactId>spring-security-oauth2</artifactId>
                 <version>${security-oauth2.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring-boot-starter</artifactId>
+                <version>1.4.0</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.16.20</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>1.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>5.1.46</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -186,6 +203,32 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <configuration>
                     <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <!-- 国内docker 镜像：registry-mirror=http://f2d6cb40.m.daocloud.io -->
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>${docker.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <!-- ${project.basedir}/src/main/docker 否则：error: POST unix://localhost:80/build?t= -->
+                    <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
                 </configuration>
             </plugin>
         </plugins>

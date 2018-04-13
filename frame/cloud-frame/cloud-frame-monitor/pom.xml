@@ -5,7 +5,7 @@
 
     <groupId>com.cloud.frame.monitor</groupId>
     <artifactId>cloud-frame-monitor</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>cloud-frame-monitor</name>
@@ -15,7 +15,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.0.0.RELEASE</version>
-        <relativePath/> &lt;!&ndash; lookup parent from repository &ndash;&gt;
+        <relativePath/> &lt;!&ndash; lookup parent fentitytory &ndash;&gt;
     </parent>
 
     <properties>

@@ -1,19 +1,19 @@
-package com.cloud.frame.demo.auth.handler;
-
-import com.cloud.frame.demo.base.Result;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
-/**
- * Created by wd on 2018/3/30.
- */
+//package com.cloud.frame.demo.auth.handler;
+//
+//import com.cloud.frame.demo.base.Result;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.security.core.AuthenticationException;
+//import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+//import org.springframework.stereotype.Component;
+//
+//import javax.servlet.ServletException;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import java.io.IOException;
+//
+///**
+// * Created by wd on 2018/3/30.
+// */
 //@Component
 //public class FrameAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 //

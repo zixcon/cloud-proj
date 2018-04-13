@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
 
     public RcUserEntity findByUsername(String username) {
-        return new RcUserEntity();
+        return null;
+//        return new RcUserEntity();
     }
 }

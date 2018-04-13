@@ -12,15 +12,21 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.approval.ApprovalStore;
+import org.springframework.security.oauth2.provider.approval.TokenApprovalStore;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * Created by wd on 2018/3/30.
  */
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -28,16 +34,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-//    @Autowired
-//    private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
     @Autowired
     private FrameUserDetailsService frameUserDetailsService;
 
     @Bean
     public RedisTokenStore redisTokenStore() {
-//        return new RedisTokenStore(redisConnectionFactory);
-        return null;
+        return new RedisTokenStore(redisConnectionFactory);
     }
 
     /**
@@ -47,16 +52,23 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 //    public JdbcTokenStore jdbcTokenStore(){
 //        return new JdbcTokenStore(dataSource);
 //    }
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        //clients.withClientDetails(clientDetails());
-        clients.inMemory().withClient("app").secret("app").scopes("app").authorizedGrantTypes("password", "refresh_token");
+    @Bean
+    public ApprovalStore approvalStore() {
+        TokenApprovalStore store = new TokenApprovalStore();
+        store.setTokenStore(redisTokenStore());
+        return store;
     }
 
-//    @Bean
-//    public ClientDetailsService clientDetails() {
-//        return new JdbcClientDetailsService(dataSource);
-//    }
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.withClientDetails(clientDetails());
+//        clients.inMemory().withClient("app").secret("app").scopes("app").authorizedGrantTypes("password", "refresh_token");
+    }
+
+    @Bean
+    public ClientDetailsService clientDetails() {
+        return new JdbcClientDetailsService(dataSource);
+    }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {

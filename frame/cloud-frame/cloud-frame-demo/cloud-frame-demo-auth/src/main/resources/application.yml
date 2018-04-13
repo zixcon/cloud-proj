@@ -7,14 +7,14 @@ spring:
 
 #  zipkin:
 #      base-url: http://10.10.8.2:9050
-  jpa:
-    show-sql: true
-  datasource:
-    url: jdbc:mysql://192.168.122.128:3306/zuul_auth?useUnicode=true&characterEncoding=utf-8
-    username: xx
-    password: xxxx
-    druid:
-      driver-class-name: com.mysql.jdbc.Driver
+#  jpa:
+#    show-sql: true
+#  datasource:
+#    url: jdbc:mysql://192.168.122.128:3306/zuul_auth?useUnicode=true&characterEncoding=utf-8
+#    username: xx
+#    password: xxxx
+#    druid:
+#      driver-class-name: com.mysql.jdbc.Driver
   redis:
     host: 127.0.0.1
     port: 6379
@@ -40,6 +40,10 @@ security:
   oauth2:
     resource:
       filter-order: 3
+
+shiro:
+  enabled: true
+
 logging:
   config: classpath:logback.xml
   level:
