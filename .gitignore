@@ -5,6 +5,7 @@
 */.mvn
 */*.log
 */target
+*/target/*
 target/*
 .mvn/*
 */.mvn/*
