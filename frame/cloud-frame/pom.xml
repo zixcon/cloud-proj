@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.0.RELEASE</version>
+        <version>2.0.1.RELEASE</version>
         <relativePath/> <!-- lookup parent fentitytory -->
     </parent>
 
@@ -26,6 +26,7 @@
         <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
         <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
         <security-oauth2.version>2.3.0.RELEASE</security-oauth2.version>
+        <mysql.version>5.1.46</mysql.version>
         <docker.plugin.version>0.4.12</docker.plugin.version>
         <docker.image.prefix>cloud-frame</docker.image.prefix>
         <!--<spring-boot-admin.version>1.5.7</spring-boot-admin.version>-->
@@ -155,9 +156,26 @@
                 <version>1.3.2</version>
             </dependency>
             <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>1.3.5</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cloud.frame.demo.common.mybatis</groupId>
+                <artifactId>cloud-frame-demo-common-mybatis</artifactId>
+                <version>0.0.1</version>
+                <scope>system</scope>
+                <systemPath>/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/target/cloud-frame-demo-common-mybatis-0.0.1.jar</systemPath>
+            </dependency>
+            <dependency>
+                <groupId>com.cloud.frame.demo</groupId>
+                <artifactId>cloud-frame-demo-common-beans</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+            <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.46</version>
+                <version>${mysql.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -192,6 +210,52 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <executions>
+                    <execution>
+                        <id>Generate MyBatis Artifacts</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>true</skip>
+                    <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>${mysql.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <version>1.3.5</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.cloud.frame.demo.common.mybatis</groupId>
+                        <artifactId>cloud-frame-demo-common-mybatis</artifactId>
+                        <version>0.0.1</version>
+                        <scope>system</scope>
+                        <systemPath>/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/target/cloud-frame-demo-common-mybatis-0.0.1.jar</systemPath>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>pl.project13.maven</groupId>
                 <artifactId>git-commit-id-plugin</artifactId>
                 <configuration>
@@ -219,7 +283,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <skipDocker>true</skipDocker>
+                    <imageName>${docker.image.prefix}/${project.artifactId}:${project.version}</imageName>
                     <!-- ${project.basedir}/src/main/docker 否则：error: POST unix://localhost:80/build?t= -->
                     <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
                     <resources>

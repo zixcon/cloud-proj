@@ -20,9 +20,12 @@
 
     <modules>
         <module>cloud-frame-demo-common-beans</module>
+        <module>cloud-frame-demo-common-design</module>
+        <module>cloud-frame-demo-dao-mybatis</module>
         <module>cloud-frame-demo-provider</module>
         <module>cloud-frame-demo-consumer</module>
         <module>cloud-frame-demo-reactive-web</module>
+        <!--<module>cloud-frame-demo-common-mybatis</module>-->
         <!--<module>cloud-frame-demo-auth</module>-->
     </modules>
 

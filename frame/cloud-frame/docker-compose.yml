@@ -1,0 +1,17 @@
+version: "3"
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+#    volumes:
+#      - '/data/log:/data/log'
+  reactive-web:
+    image: cloud-frame-demo/cloud-frame-demo-reactive-web:0.0.1
+    ports:
+      - '9090:9090'
+#    volumes:
+#      - '/data/log:/data/log'
+#    depends_on:
+#      links:
+#        - redis

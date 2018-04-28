@@ -20,7 +20,7 @@ import javax.sql.DataSource;
  * Created by wd on 2018/1/25.
  */
 @Configuration
-@MapperScan("com.cloud.frame.demo.reactive.mapper")
+@MapperScan("com.cloud.frame.demo.reactive.generator")
 public class DataSourceConfig {
 
     @Bean

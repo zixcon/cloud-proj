@@ -65,6 +65,9 @@
 			<plugin>
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
+				<configuration>
+					<skipDocker>false</skipDocker>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

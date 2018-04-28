@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Mapper @MapperScan("com.holdon.dao.mapper")
+ * @Mapper @MapperScan("com.holdon.dao.generator")
  * Created by wd on 2018/1/25.
  */
 public interface AccountInfoMapper {

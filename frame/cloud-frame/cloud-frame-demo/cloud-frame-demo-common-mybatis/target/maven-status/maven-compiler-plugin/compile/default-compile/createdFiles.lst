@@ -1,0 +1,5 @@
+com/cloud/frame/demo/common/mybatis/plugins/MySqlPageLimitPlugin.class
+com/cloud/frame/demo/common/mybatis/plugins/DeleteLogicByIdsPlugin.class
+com/cloud/frame/demo/common/mybatis/App.class
+com/cloud/frame/demo/common/mybatis/types/FrameJavaTypeResolver.class
+com/cloud/frame/demo/common/mybatis/plugins/JavaCommentPlugin.class
