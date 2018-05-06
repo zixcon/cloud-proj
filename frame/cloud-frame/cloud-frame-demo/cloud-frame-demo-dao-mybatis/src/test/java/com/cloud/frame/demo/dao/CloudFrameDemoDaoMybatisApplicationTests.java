@@ -22,9 +22,28 @@ public class CloudFrameDemoDaoMybatisApplicationTests {
     }
 
     @Test
+    public void test1() {
+//        for (int i = 0; i <= 15; i++) {
+//            AccountInfoEntity entity = new AccountInfoEntity();
+//            entity.setPassword("123456");
+//            entity.setUserName("123" + i);
+//            entity.setSalt("xxx" + i);
+//            accountInfoService.insertSelective(entity);
+//        }
+    }
+
+    @Test
     public void test() {
-        List<AccountInfoEntity> list = accountInfoService.getPage(1, 10);
-        System.out.println(list.toString());
+        List<AccountInfoEntity> list = accountInfoService.getPage(2, 10);
+        for (AccountInfoEntity entity : list) {
+            System.out.println(entity.getUserName());
+        }
+    }
+
+    @Test
+    public void test2() {
+        Long total = accountInfoService.countTotal();
+        System.out.println(total);
     }
 
 }

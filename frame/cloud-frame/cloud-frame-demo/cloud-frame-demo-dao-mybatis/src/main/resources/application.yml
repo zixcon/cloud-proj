@@ -12,7 +12,7 @@ spring:
 
 mybatis:
   type-aliases-package: com.cloud.frame.demo.dao.**.entity
-  mapper-locations: classpath:/generator/mapper/*.xml
-  configLocation: classpath:generator/mybatis-config.xml
+  mapper-locations: classpath*:/generator/mapper/**/*Mapper.xml
+  configLocation: classpath*:/generator/mybatis-config.xml
 
 

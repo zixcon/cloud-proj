@@ -95,9 +95,11 @@ public class MySqlPageLimitPlugin extends PluginAdapter {
         getOffset.setReturnType(integerWrapper);
         getOffset.setName("getOffset");
         List<String> getOffsets = new ArrayList<>();
-        getOffsets.add("this.offset = this.pageNo * this.pageSize;");
+        getOffsets.add("if (null != this.pageNo && null != this.pageSize) {");
+        getOffsets.add("    this.offset = (this.pageNo - 1) * this.pageSize;");
+        getOffsets.add("}");
         getOffsets.add("return offset;");
-        getOffset.addBodyLines(getLimits);
+        getOffset.addBodyLines(getOffsets);
         topLevelClass.addMethod(getOffset);
 
         return true;

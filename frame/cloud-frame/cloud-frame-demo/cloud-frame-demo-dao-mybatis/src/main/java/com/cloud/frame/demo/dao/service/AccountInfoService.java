@@ -32,4 +32,13 @@ public class AccountInfoService {
         return accountInfoEntityMapper.selectByExample(example);
     }
 
+    public Long countTotal() {
+        AccountInfoEntityExample example = new AccountInfoEntityExample();
+        return accountInfoEntityMapper.countByExample(example);
+    }
+
+    public void insertSelective(AccountInfoEntity entity) {
+        accountInfoEntityMapper.insertSelective(entity);
+    }
+
 }

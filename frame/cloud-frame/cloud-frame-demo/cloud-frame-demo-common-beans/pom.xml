@@ -9,6 +9,7 @@
 
     <groupId>com.cloud.frame.demo</groupId>
     <artifactId>cloud-frame-demo-common-beans</artifactId>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>cloud-frame-demo-common-beans</name>

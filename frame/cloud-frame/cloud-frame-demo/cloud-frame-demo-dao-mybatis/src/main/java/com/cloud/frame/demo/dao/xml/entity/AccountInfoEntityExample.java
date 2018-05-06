@@ -94,8 +94,10 @@ public class AccountInfoEntityExample {
     }
 
     public Integer getOffset() {
-        this.limit = this.pageSize;
-        return limit;
+        if (null != this.pageNo && null != this.pageSize) {
+                this.offset = (this.pageNo - 1) * this.pageSize;
+        }
+        return offset;
     }
 
     protected abstract static class GeneratedCriteria {

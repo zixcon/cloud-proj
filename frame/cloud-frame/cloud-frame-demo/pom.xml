@@ -21,6 +21,7 @@
     <modules>
         <module>cloud-frame-demo-common-beans</module>
         <module>cloud-frame-demo-common-design</module>
+        <module>cloud-frame-demo-auth-jwt</module>
         <module>cloud-frame-demo-dao-mybatis</module>
         <module>cloud-frame-demo-provider</module>
         <module>cloud-frame-demo-consumer</module>

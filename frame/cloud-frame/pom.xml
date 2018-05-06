@@ -22,11 +22,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring.cloud.version>Finchley.M8</spring.cloud.version>
-        <spring-boot.version>2.0.0.RELEASE</spring-boot.version>
+        <spring.cloud.version>Finchley.RC1</spring.cloud.version>
+        <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
         <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
         <security-oauth2.version>2.3.0.RELEASE</security-oauth2.version>
         <mysql.version>5.1.46</mysql.version>
+        <swagger.version>2.9.0</swagger.version>
         <docker.plugin.version>0.4.12</docker.plugin.version>
         <docker.image.prefix>cloud-frame</docker.image.prefix>
         <!--<spring-boot-admin.version>1.5.7</spring-boot-admin.version>-->
@@ -143,6 +144,35 @@
                 <groupId>org.apache.shiro</groupId>
                 <artifactId>shiro-spring-boot-starter</artifactId>
                 <version>1.4.0</version>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>3.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.0</version>
+            </dependency>
+
+            <!-- 构建Restful API -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>20.0</version>
             </dependency>
 
             <dependency>

@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Result {
+public class Result<T> {
 
-    private Boolean result = true;
+    private Boolean success = true;
     private String code;
     private String message;
-    private Object body;
+    private T body;
 
     public static Result build() {
         return new Result();

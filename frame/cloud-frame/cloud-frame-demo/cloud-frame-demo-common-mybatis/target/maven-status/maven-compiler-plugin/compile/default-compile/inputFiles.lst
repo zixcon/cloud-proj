@@ -1,6 +1,6 @@
-/Users/topaz/Documents/dev/git/learning/learngit/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/DeleteLogicByIdsPlugin.java
-/Users/topaz/Documents/dev/git/learning/learngit/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/JavaCommentPlugin.java
-/Users/topaz/Documents/dev/git/learning/learngit/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/types/FrameJavaTypeResolver.java
-/Users/topaz/Documents/dev/git/learning/learngit/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/OverWriteCleanPlugin.java
-/Users/topaz/Documents/dev/git/learning/learngit/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/App.java
-/Users/topaz/Documents/dev/git/learning/learngit/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/MySqlPageLimitPlugin.java
+/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/types/FrameJavaTypeResolver.java
+/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/DeleteLogicByIdsPlugin.java
+/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/MySqlPageLimitPlugin.java
+/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/JavaCommentPlugin.java
+/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/App.java
+/Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/cloud-frame-demo/cloud-frame-demo-common-mybatis/src/main/java/com/cloud/frame/demo/common/mybatis/plugins/OverWriteCleanPlugin.java

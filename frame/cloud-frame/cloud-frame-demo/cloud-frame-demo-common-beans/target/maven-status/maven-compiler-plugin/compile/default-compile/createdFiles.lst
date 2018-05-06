@@ -1,2 +1,4 @@
 com/cloud/frame/demo/App.class
 com/cloud/frame/demo/base/Result.class
+com/cloud/frame/demo/base/Page.class
+com/cloud/frame/demo/constant/AuthCodeConstant.class
