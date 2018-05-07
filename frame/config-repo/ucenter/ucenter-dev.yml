@@ -1,0 +1,37 @@
+server:
+  port: 9092
+
+spring:
+  datasource:
+    hikari:
+      driver-class-name: com.mysql.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost:3306/bootdemo?useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: 123456
+      schema: classpath:db/v0.0.1.sql
+  application:
+    name: ucenter
+  profiles:
+    active: dev
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
+
+
+mybatis:
+  type-aliases-package: com.cloud.frame.demo.dao.**.entity
+  mapper-locations: classpath*:/generator/mapper/**/*Mapper.xml
+  configLocation: classpath*:/generator/mybatis-config.xml
+
+jwt:
+  header: Authorization
+  secret: yoursecret
+  expiration: 604800
+  tokenHead: Bearer
+
+
+
+
+
