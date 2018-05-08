@@ -51,20 +51,19 @@ public class JwtUtils {
      */
     public static Result<Claims> validateJWT(String jwtStr, String secert) {
         Result<Claims> checkResult = Result.build();
-        Claims claims = null;
+        Claims claims ;
         try {
             claims = parseJWT(jwtStr, secert);
-            checkResult.setSuccess(true);
             checkResult.setBody(claims);
         } catch (ExpiredJwtException e) {
+            checkResult.setSuccess(false);
             checkResult.setCode(AuthCodeConstant.JWT_ERRCODE_EXPIRE + "");
-            checkResult.setSuccess(false);
         } catch (SignatureException e) {
-            checkResult.setCode(AuthCodeConstant.JWT_ERRCODE_FAIL + "");
             checkResult.setSuccess(false);
+            checkResult.setCode(AuthCodeConstant.JWT_ERRCODE_FAIL + "");
         } catch (Exception e) {
-            checkResult.setCode(AuthCodeConstant.JWT_ERRCODE_FAIL + "");
             checkResult.setSuccess(false);
+            checkResult.setCode(AuthCodeConstant.JWT_ERRCODE_FAIL + "");
         }
         return checkResult;
     }

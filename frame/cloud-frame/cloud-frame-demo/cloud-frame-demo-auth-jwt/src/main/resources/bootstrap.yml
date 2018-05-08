@@ -1,0 +1,24 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
+
+spring:
+  application:
+    name: ucenter
+  cloud:
+    config:
+      label: 0.0.1
+      name: ucenter
+      profile: dev,prod,test
+      fail-fast: true
+      discovery:
+        service-id: cloud-frame-config
+        enabled: true
+      retry:
+        max-attempts: 2
+        max-interval: 100
+
+
+#    uri: http://registry:8888
+#    enabled: true

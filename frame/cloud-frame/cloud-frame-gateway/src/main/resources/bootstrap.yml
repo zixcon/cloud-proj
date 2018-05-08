@@ -1,6 +1,7 @@
 spring:
   application:
-    name: cloud-frame-gateway(zuul智能路由)
+    # (zuul智能路由)
+    name: cloud-frame-gateway
   cloud:
     config:
       uri: ${vcap.services.${PREFIX:}configserver.credentials.uri:http://user:password@localhost:8888}

@@ -27,8 +27,8 @@ eureka:
 
 zuul:
   addProxyHeaders: false
-  # ignoredServices: '*'
-  prefix: /api
+  ignoredServices: '*'
+#  prefix: /api
   # strip-prefix 放这里 全局 ，放在 routes下 局部
   # strip-prefix: false
   routes:
@@ -48,11 +48,11 @@ zuul:
       path: /demo/consumer/**
       serviceId: cloud-frame-demo-consumer
       strip-prefix: false
-    stores: /stores/**
-    customers: /customers/**
-    zuulserver: /self/**
-    legacy:
-      path: /**
+    ucenter:
+      # prefix: /ucenter
+      path: /ucenter/** # 路由路径
+      serviceId: ucenter
+      strip-prefix: true # 去掉前缀
 
 demo-provider:
   ribbon:

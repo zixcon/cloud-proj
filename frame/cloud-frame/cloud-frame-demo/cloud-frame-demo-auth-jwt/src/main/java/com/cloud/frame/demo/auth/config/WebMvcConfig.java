@@ -33,7 +33,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        String[] patterns = new String[]{"/api/auth/login", "/*.html", "/swagger-resources/**", "/oauth/*"};
+        String[] patterns = new String[]{"/api/auth/login", "/*.html",
+//                "/swagger-resources/**", "/v2/api-docs", "/swagger-ui.html",
+                "/oauth/*","/error/*"};
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(patterns);

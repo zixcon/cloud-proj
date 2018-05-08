@@ -17,8 +17,18 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/zixcon/cloud-proj
-          search-paths: config-repo
+          uri: https://github.com/zixcon/cloud-proj.git
+          # 多项目配置根据application项目名区分
+          search-paths: frame/config-repo/{application}
+          # 必须指定版本分支（最好使用master）
+          default-label: 0.0.1
+        native:
+          search-locations: classpath:/*.yml
+  # 如果不需要指定本地，则注释掉即可
+  profiles:
+    # 指定client使用本地属性文件，并需要配置文件路径(spring.cloud.config.server.native.searchLocations)
+    active: native
+
 #  rabbitmq:
 #    host: rabbitmq
 #    stream:

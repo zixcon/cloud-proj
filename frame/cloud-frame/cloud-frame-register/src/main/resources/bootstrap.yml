@@ -1,6 +1,7 @@
 spring:
   application:
-    name: cloud-frame-register(Eureka服务发现<Consul/Eureka>)
+    # (Eureka服务发现<Consul/Eureka>)
+    name: cloud-frame-register
   cloud:
     config:
       uri: ${CONFIG_SERVER_URL:http://localhost:8888}

@@ -36,7 +36,8 @@ public class AuthInterceptor implements HandlerInterceptor {
             throws Exception {
 
         if (handler instanceof HandlerMethod) {
-            return this.handleToken(request, response);
+            return true;
+//            return this.handleToken(request, response);
         } else {
             return true;
         }
