@@ -19,7 +19,8 @@ public class SwaggerDocumentConfig implements SwaggerResourcesProvider {
     @Override
     public List<SwaggerResource> get() {
         List resources = new ArrayList<>();
-        resources.add(swaggerResource("用户权限系统", "/ucenter/v2/api-docs", "2.0"));
+        // swagger2 和 zuul整合后，需要访问/v2/api-docs,这里由于ucenter设置了groupName 那么就需要指定/v2/api-docs?group=ucenter
+        resources.add(swaggerResource("用户权限系统", "/ucenter/v2/api-docs?group=ucenter", "2.0"));
         return resources;
     }
 

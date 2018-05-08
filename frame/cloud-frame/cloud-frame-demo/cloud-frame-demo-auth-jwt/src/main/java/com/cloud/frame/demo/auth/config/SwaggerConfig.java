@@ -1,6 +1,7 @@
 package com.cloud.frame.demo.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -25,6 +26,10 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
+    private String basePackage = "com.cloud.frame.demo.auth.api";
+    @Value("${spring.application.name}")
+    private String serviceName;
+
     @Autowired
     private JwtConfig jwtConfig;
 
@@ -41,10 +46,11 @@ public class SwaggerConfig {
         List<Parameter> pars = new ArrayList<>();
         pars.add(ticketPar.build());
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("权限管理")
+// swagger2 和 zuul整合后，需要访问/v2/api-docs,这里设置了groupName 那么就需要指定/v2/api-docs?group=ucenter
+                .groupName("ucenter")
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.cloud.frame.demo.auth.api"))
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())
                 .build()
                 .globalOperationParameters(pars);

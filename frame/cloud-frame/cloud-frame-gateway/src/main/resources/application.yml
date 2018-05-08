@@ -53,6 +53,8 @@ zuul:
       path: /ucenter/** # 路由路径
       serviceId: ucenter
       strip-prefix: true # 去掉前缀
+#    legacy:
+#      path: /**
 
 demo-provider:
   ribbon:

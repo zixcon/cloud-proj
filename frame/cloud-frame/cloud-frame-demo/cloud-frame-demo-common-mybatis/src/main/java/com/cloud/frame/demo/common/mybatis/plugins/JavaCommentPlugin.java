@@ -14,6 +14,46 @@ import java.util.Properties;
  */
 public class JavaCommentPlugin implements CommentGenerator {
 
+    /**
+     * 生成swagger2注解
+     *
+     * @param introspectedTable
+     * @return
+     */
+    private String handleApiModel(IntrospectedTable introspectedTable) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("@ApiModel(");
+        if (StringUtility.stringHasValue(introspectedTable.getRemarks())) {
+            builder.append(" value=\"").append(introspectedTable.getRemarks()).append("\"");
+            builder.append(" ,description=\"").append(introspectedTable.getRemarks()).append("\"");
+        }
+        builder.append(")");
+        return builder.toString();
+    }
+
+    /**
+     * 生成swagger2注解
+     *
+     * @param introspectedColumn
+     * @return
+     */
+    private String handleApiModelProperty(IntrospectedColumn introspectedColumn) {
+        StringBuilder builder = new StringBuilder("@ApiModelProperty(");
+        builder.append(" name=\"").append(introspectedColumn.getJavaProperty()).append("\"");
+        builder.append(" ,required=").append(!introspectedColumn.isNullable());
+        builder.append(" ,example=\"").append(introspectedColumn.getDefaultValue()).append("\"");
+        if (StringUtility.stringHasValue(introspectedColumn.getRemarks())) {
+            builder.append(" ,value=\"").append(introspectedColumn.getRemarks()).append("\"");
+        }
+        if (introspectedColumn.getJavaProperty().equalsIgnoreCase("createTime")
+            || introspectedColumn.getJavaProperty().equalsIgnoreCase("id")
+            || introspectedColumn.getJavaProperty().equalsIgnoreCase("updateTime")) {
+            builder.append(" ,hidden=").append(true);
+        }
+        builder.append(")");
+        return builder.toString();
+    }
+
     @Override
     public void addConfigurationProperties(Properties properties) {
 
@@ -29,7 +69,7 @@ public class JavaCommentPlugin implements CommentGenerator {
             field.addJavaDocLine(" * " + introspectedColumn.getRemarks());
         }
         field.addJavaDocLine(" */");
-
+        field.addJavaDocLine(this.handleApiModelProperty(introspectedColumn));
     }
 
     @Override
@@ -39,9 +79,13 @@ public class JavaCommentPlugin implements CommentGenerator {
 
     @Override
     public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        topLevelClass.addJavaDocLine("import io.swagger.annotations.ApiModel;");
+        topLevelClass.addJavaDocLine("import io.swagger.annotations.ApiModelProperty;");
+        topLevelClass.addJavaDocLine("");
         topLevelClass.addJavaDocLine("/**");
         topLevelClass.addJavaDocLine(" * " + introspectedTable.getRemarks());
         topLevelClass.addJavaDocLine(" */");
+        topLevelClass.addJavaDocLine(this.handleApiModel(introspectedTable));
     }
 
     @Override

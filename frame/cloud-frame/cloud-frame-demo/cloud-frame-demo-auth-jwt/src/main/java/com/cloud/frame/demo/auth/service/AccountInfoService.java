@@ -28,4 +28,12 @@ public class AccountInfoService {
         }
         return null;
     }
+
+    public void register(String username, String password) {
+        AccountInfoEntity entity = new AccountInfoEntity();
+        entity.setUserName(username);
+        entity.setSalt("salt");
+        entity.setPassword(password);
+        accountInfoEntityMapper.insertSelective(entity);
+    }
 }

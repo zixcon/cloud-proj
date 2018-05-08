@@ -3,15 +3,22 @@ package com.cloud.frame.demo.auth.config;
 import com.cloud.frame.demo.auth.interceptor.AuthInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.GsonHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
+import springfox.documentation.spring.web.json.Json;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,13 +36,15 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 添加权限拦截
+     *
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        String[] patterns = new String[]{"/api/auth/login", "/*.html",
-//                "/swagger-resources/**", "/v2/api-docs", "/swagger-ui.html",
-                "/oauth/*","/error/*"};
+        String[] patterns = new String[]{"/auth/login", "/auth/register/**",
+                "/*.html",
+                "/swagger-resources/**", "/v2/api-docs",
+                "/oauth/*", "/error/*"};
         registry.addInterceptor(authInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(patterns);
@@ -43,31 +52,41 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     /**
      * 添加swagger
+     *
      * @param registry
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler(new String[]{"swagger-ui.html"}).addResourceLocations(new String[]{"classpath:/META-INF/resources/"});
+        registry.addResourceHandler(new String[]{"/webjars*"}).addResourceLocations(new String[]{"classpath:/META-INF/resources/webjars/"});
     }
 
     /**
      * 添加添加GsonHttpMessageConverter，排除MappingJackson2HttpMessageConverter
      * http://blog.gelu.me/2017/spring-boot-uses-gson-to-replace-jackson/
+     *
      * @param converters
      */
     @Override
     public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         converters.removeIf(httpMessageConverter -> httpMessageConverter instanceof MappingJackson2HttpMessageConverter); // 删除MappingJackson2HttpMessageConverter
         Gson gson = new GsonBuilder()
+                // 注册swagger2 json序列化机制转为gson
+                .registerTypeAdapter(Json.class, springfoxGson2JsonSerializer())
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
         GsonHttpMessageConverter gsonHttpMessageConverter = new GsonHttpMessageConverter();
         gsonHttpMessageConverter.setGson(gson);
         converters.add(gsonHttpMessageConverter);
+    }
+
+    /**
+     * swagger2 json序列化机制转为gson
+     *
+     * @return
+     */
+    private JsonSerializer<Json> springfoxGson2JsonSerializer() {
+        return (json, type, jsc) -> new JsonParser().parse(json.value());
     }
 
 }

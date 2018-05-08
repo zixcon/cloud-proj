@@ -20,5 +20,3 @@ spring:
         max-interval: 100
 
 
-#    uri: http://registry:8888
-#    enabled: true

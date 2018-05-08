@@ -2,15 +2,20 @@ package com.cloud.frame.demo.auth.dao.entity;
 
 import java.util.Date;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * 
  */
+@ApiModel()
 public class AccountInfoEntity {
     /**
      * 默认值：null
      * 最大长度：10
      * 表名：id
      */
+    @ApiModelProperty( name="id" ,required=true ,example="null")
     private Integer id;
 
     /**
@@ -18,6 +23,7 @@ public class AccountInfoEntity {
      * 最大长度：50
      * 表名：user_name
      */
+    @ApiModelProperty( name="userName" ,required=true ,example="null")
     private String userName;
 
     /**
@@ -25,6 +31,7 @@ public class AccountInfoEntity {
      * 最大长度：100
      * 表名：password
      */
+    @ApiModelProperty( name="password" ,required=true ,example="null")
     private String password;
 
     /**
@@ -32,6 +39,7 @@ public class AccountInfoEntity {
      * 最大长度：50
      * 表名：salt
      */
+    @ApiModelProperty( name="salt" ,required=true ,example="null")
     private String salt;
 
     /**
@@ -39,6 +47,7 @@ public class AccountInfoEntity {
      * 最大长度：3
      * 表名：status
      */
+    @ApiModelProperty( name="status" ,required=true ,example="0")
     private Integer status;
 
     /**
@@ -46,6 +55,7 @@ public class AccountInfoEntity {
      * 最大长度：3
      * 表名：type
      */
+    @ApiModelProperty( name="type" ,required=true ,example="0")
     private Integer type;
 
     /**
@@ -54,6 +64,7 @@ public class AccountInfoEntity {
      * 表名：create_time
      * 注册时间
      */
+    @ApiModelProperty( name="createTime" ,required=true ,example="CURRENT_TIMESTAMP" ,value="注册时间" ,hidden=true)
     private Date createTime;
 
     /**
@@ -62,6 +73,7 @@ public class AccountInfoEntity {
      * 表名：update_time
      * 更新时间
      */
+    @ApiModelProperty( name="updateTime" ,required=true ,example="CURRENT_TIMESTAMP" ,value="更新时间" ,hidden=true)
     private Date updateTime;
 
     public Integer getId() {
