@@ -4,6 +4,8 @@ import com.cloud.frame.demo.auth.config.JwtConfig;
 import com.cloud.frame.demo.auth.util.JwtUtils;
 import com.cloud.frame.demo.base.Result;
 import com.cloud.frame.demo.constant.AuthCodeConstant;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +32,9 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Autowired
     private JwtConfig jwtConfig;
+    private static final Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd HH:mm:ss")
+            .create();
 
     private static final Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
 
@@ -36,8 +42,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             throws Exception {
 
         if (handler instanceof HandlerMethod) {
-            return true;
-//            return this.handleToken(request, response);
+            return this.handleToken(request, response);
         } else {
             return true;
         }
@@ -49,7 +54,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             response.setHeader("Cache-Control", "no-cache, must-revalidate");
             PrintWriter writer = response.getWriter();
-            writer.write(message.toString());
+            writer.write(gson.toJson(message));
             writer.flush();
             writer.close();
         } catch (IOException e) {
@@ -57,14 +62,14 @@ public class AuthInterceptor implements HandlerInterceptor {
         }
     }
 
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-                           ModelAndView modelAndView) throws Exception {
-        if (response.getStatus() == 500) {
-            modelAndView.setViewName("/error/500");
-        } else if (response.getStatus() == 404) {
-            modelAndView.setViewName("/error/404");
-        }
-    }
+//    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+//                           ModelAndView modelAndView) throws Exception {
+//        if (response.getStatus() == 500) {
+//            modelAndView.setViewName("/error/500");
+//        } else if (response.getStatus() == 404) {
+//            modelAndView.setViewName("/error/404");
+//        }
+//    }
 
     /**
      * 该方法也是需要当前对应的Interceptor的preHandle方法的返回值为true时才会执行。该方法将在整个请求完成之后，也就是DispatcherServlet渲染了视图执行，

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Created by wd on 2018/5/8.
  */
-@Api("用户注册")
+@Api(value = "用户注册", tags = {"用户注册接口"})
 @RestController
 @RequestMapping("/auth/register")
 public class RegisterController {

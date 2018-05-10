@@ -5,9 +5,7 @@ import com.cloud.frame.demo.auth.dao.entity.AccountInfoEntity;
 import com.cloud.frame.demo.auth.service.AccountInfoService;
 import com.cloud.frame.demo.auth.util.JwtUtils;
 import com.cloud.frame.demo.base.Result;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(value = "权限验证", tags = {"权限验证接口"})
 @RestController
-@RequestMapping("/auth/login")
+@RequestMapping("/auth")
 public class LoginController {
 
     @Autowired
@@ -26,12 +24,13 @@ public class LoginController {
     @Autowired
     private AccountInfoService accountInfoService;
 
-    /**
-     * 用户登陆
-     */
     @ApiOperation("用户登陆")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "username", value = "用户名", required = true),
+            @ApiImplicitParam(name = "password", value = "密码", required = true)
+    })
     @ResponseBody
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    @GetMapping(value = "/login", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Result<String> login(String username, String password) {
         Result<String> result = Result.build();
         result.setSuccess(false);
@@ -53,21 +52,6 @@ public class LoginController {
         }
     }
 
-    @ApiOperation(value = "获取用户信息", tags = {"获取用户信息"}, notes = "注意问题点")
-    @RequestMapping(value = "/description", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result<AccountInfoEntity> description(@ApiParam(name = "username", value = "用户", required = true) String username) {
-        Result<AccountInfoEntity> result = Result.build();
-        AccountInfoEntity user = accountInfoService.getEntity(username);
-        result.setBody(user);
-        return result;
-    }
 
-    @ApiOperation(value = "获取用户信息", tags = {"获取用户信息"}, notes = "注意问题点")
-    @RequestMapping(value = "/desc", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result<AccountInfoEntity> desc(@RequestBody @ApiParam(name = "用户对象", value = "传入json格式", required = true) AccountInfoEntity info) {
-        Result<AccountInfoEntity> result = Result.build();
-        result.setBody(info);
-        return result;
-    }
 
 }

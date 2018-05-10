@@ -7,9 +7,9 @@
     <!--所以我们需要清楚的知道这些属性的作用及默认值。-->
     <settings>
         <!--logImpl 指定 MyBatis 所用日志的具体实现，未指定时将自动查找。-->
-        <setting name="logImpl" value="STDOUT_LOGGING"/>
-        <!--<setting name="cacheEnabled" value="false"/>
+        <!--<setting name="logImpl" value="STDOUT_LOGGING"/>-->
         <setting name="lazyLoadingEnabled" value="true"/>
+        <!--<setting name="cacheEnabled" value="false"/>
         <setting name="multipleResultSetsEnabled" value="true"/>
         <setting name="useColumnLabel" value="true"/>
         <setting name="useGeneratedKeys" value="false"/>

@@ -46,7 +46,7 @@ public class SwaggerConfig {
         List<Parameter> pars = new ArrayList<>();
         pars.add(ticketPar.build());
         return new Docket(DocumentationType.SWAGGER_2)
-// swagger2 和 zuul整合后，需要访问/v2/api-docs,这里设置了groupName 那么就需要指定/v2/api-docs?group=ucenter
+                // swagger2 和 zuul整合后，需要访问/v2/api-docs,这里设置了groupName 那么就需要指定/v2/api-docs?group=ucenter
                 .groupName("ucenter")
                 .apiInfo(apiInfo())
                 .select()
@@ -59,10 +59,10 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("Spring 中使用Swagger2构建文档")
+                .title("ucenter用户中心")
                 .termsOfServiceUrl("http://127.0.0.1:9098")
                 //创建人
-                .contact(new Contact("demo-auth-jwt ", "http://127.0.0.1:9098", "zixcon.fan@outlook.com"))
+                .contact(new Contact("ucenter", "http://127.0.0.1:9098", "zixcon.fan@outlook.com"))
                 //版本号
                 .version("0.0.1")
                 .build();

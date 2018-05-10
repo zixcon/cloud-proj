@@ -20,3 +20,17 @@ jwt:
   secret: yoursecret
   expiration: 604800
   tokenHead: Bearer
+
+logging:
+  file: ucenter.log
+  path: /Users/wd/Documents/dev/git/cloud-proj/cloud-proj/frame/cloud-frame/logs
+  config: classpath:spring/logback-spring.xml
+  level:
+    com.cloud.frame.demo.auth: info
+  pattern:
+    console: %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+#  level:
+#    org:
+#      springframework:
+#        web: INFO
+
