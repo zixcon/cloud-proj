@@ -17,7 +17,7 @@ public class GlobalExceptionInterceptor {
     public Result<String> handleException(Exception e) {
         Result<String> result = new Result<>();
         result.setSuccess(false);
-        result.setMessage("服务器异常：" + e.getMessage());
+        result.setMessage("服务器异常");
         return result;
     }
 }

@@ -1,7 +1,5 @@
-package com.cloud.frame.demo.auth.config;
+package com.cloud.frame.demo.consumer.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -26,30 +24,22 @@ import java.util.List;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    private String basePackage = "com.cloud.frame.demo.auth.api";
-    @Value("${spring.application.name}")
-    private String serviceName;
-
-    @Autowired
-    private JwtConfig jwtConfig;
+    private String basePackage = "com.cloud.frame.demo.consumer.controller";
 
     @Bean
     public Docket userApi() {
         //header中的ticket参数非必填，传空也可以
         ParameterBuilder ticketPar = new ParameterBuilder();
-        ticketPar.name(jwtConfig.getHeader()).description("user token ticket")
+        ticketPar.name("Authorization").description("user token ticket")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(false)
                 .build();
-        //根据每个方法名也知道当前方法在设置什么参数
         List<Parameter> pars = new ArrayList<>();
         pars.add(ticketPar.build());
         return new Docket(DocumentationType.SWAGGER_2)
-                // swagger2 和 zuul整合后，需要访问/v2/api-docs,这里设置了groupName 那么就需要指定/v2/api-docs?group=ucenter
-                .groupName("ucenter")
-                // swagger2 和 zuul整合后，通过zuul路由请求
-                .host("127.0.0.1:8765/ucenter")
+                .groupName("demo-consumer")
+                .host("127.0.0.1:8765/consumer1")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
@@ -61,10 +51,10 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 //页面标题
-                .title("ucenter用户中心")
-                .termsOfServiceUrl("http://127.0.0.1:9098")
+                .title("demo-consumer")
+                .termsOfServiceUrl("http://127.0.0.1:8091")
                 //创建人
-                .contact(new Contact("ucenter", "http://127.0.0.1:9098", "zixcon.fan@outlook.com"))
+                .contact(new Contact("demo-consumer", "http://127.0.0.1:8091", "zixcon.fan@outlook.com"))
                 //版本号
                 .version("0.0.1")
                 .build();

@@ -2,51 +2,12 @@
 <configuration>
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
     <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}/}spring.log}"/>
+    <property name="FILE_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%thread] [%X{traceId}] [%-5level] %logger{36} - %msg%n"/>
     <include resource="org/springframework/boot/logging/logback/file-appender.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
 
-    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"/>
-    <!--<property name="LOG_LEVEL" value="${}"/>-->
-
-    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_FILE}</file>
-        <!-- 配置日志所生成的目录以及生成文件名的规则 在logs/mylog-2017-06-31.0.log.zip -->
-        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
-            <!--<fileNamePattern>logme-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>-->
-            <!--&lt;!&ndash; 如果按天来回滚，则最大保存时间为365天，365天之前的都将被清理掉 &ndash;&gt;-->
-            <!--<maxHistory>365</maxHistory>-->
-            <!--&lt;!&ndash; 日志总保存量为10GB &ndash;&gt;-->
-            <!--<totalSizeCap>10GB</totalSizeCap>-->
-            <!--<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
-                <!--&lt;!&ndash;文件达到 最大128MB时会被压缩和切割 &ndash;&gt;-->
-                <!--<maxFileSize>128 MB</maxFileSize>-->
-            <!--</timeBasedFileNamingAndTriggeringPolicy>-->
-        <!--</rollingPolicy>-->
-
-        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
-            <!--<level>TRACE</level>-->
-        <!--</filter>-->
-
-        <!--&lt;!&ndash; 文件输出的日志 的格式 &ndash;&gt;-->
-        <!--<encoder>-->
-            <!--<pattern>${LOG_PATTERN}</pattern>-->
-            <!--<charset>UTF-8</charset> &lt;!&ndash; 此处设置字符集 &ndash;&gt;-->
-        <!--</encoder>-->
-        <!-- Safely log to the same file from multiple JVMs. Degrades performance! -->
-        <prudent>false</prudent>
-    </appender>
-
-    <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
-        <!--<encoder>-->
-            <!--<pattern>${LOG_PATTERN}</pattern>-->
-        <!--</encoder>-->
-
-        <!--&lt;!&ndash;<filter class="ch.qos.logback.classic.filter.ThresholdFilter">&ndash;&gt;-->
-            <!--&lt;!&ndash;<level>${LOG_LEVEL}</level>&ndash;&gt;-->
-        <!--&lt;!&ndash;</filter>&ndash;&gt;-->
-    <!--</appender>-->
-
-    <root level="${LOG_LEVEL}">
-        <appender-ref ref="STDOUT"/>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
 

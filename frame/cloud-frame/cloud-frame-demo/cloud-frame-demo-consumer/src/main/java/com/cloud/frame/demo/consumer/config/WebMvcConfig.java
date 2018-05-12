@@ -1,11 +1,9 @@
-package com.cloud.frame.demo.auth.config;
+package com.cloud.frame.demo.consumer.config;
 
-import com.cloud.frame.demo.auth.interceptor.AuthInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonSerializer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -28,24 +26,14 @@ import java.util.List;
 @EnableAspectJAutoProxy
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Autowired
-    private AuthInterceptor authInterceptor;
-
 
     /**
-     * 添加权限拦截
+     * 添加拦截
      *
      * @param registry
      */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        String[] patterns = new String[]{"/auth/token/*", "/auth/register/**",
-                "/*.html",
-                "/swagger-resources/**", "/v2/api-docs",
-                };
-        registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns(patterns);
     }
 
     /**

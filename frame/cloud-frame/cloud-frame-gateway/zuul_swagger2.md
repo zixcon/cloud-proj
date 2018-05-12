@@ -61,3 +61,18 @@
                     return bean;
                 }
              }
+    3. swagger2整合后无法通过zuul路由请求问题
+         子系统中，需要设置hosts
+         return new Docket(DocumentationType.SWAGGER_2)
+                         // swagger2 和 zuul整合后，需要访问/v2/api-docs,这里设置了groupName 那么就需要指定/v2/api-docs?group=ucenter
+                         .groupName("ucenter")
+                         // swagger2 和 zuul整合后，通过zuul路由请求
+                         .host("127.0.0.1:8765/ucenter")
+                         .apiInfo(apiInfo())
+                         .select()
+                         .apis(RequestHandlerSelectors.basePackage(basePackage))
+                         .paths(PathSelectors.any())
+                         .build()
+                         .globalOperationParameters(pars);
+    4. Resolved exception caused by Handler execution: org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported
+          这个问题是zuul路由配置的问题，导致没有匹配的url请求导致的

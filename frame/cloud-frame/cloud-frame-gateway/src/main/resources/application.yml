@@ -26,8 +26,10 @@ eureka:
       defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
 
 zuul:
+  sensitiveHeaders: Authorization,traceId
   addProxyHeaders: false
   ignoredServices: '*'
+#  ignored-patterns: /**/auth/token/**,/**/*.html,/**/auth/register/**,/**/swagger-resources/**,/**/v2/api-docs
 #  prefix: /api
   # strip-prefix 放这里 全局 ，放在 routes下 局部
   # strip-prefix: false
@@ -44,15 +46,15 @@ zuul:
       # http://192.168.90.33:8765/api/demo/provider/print/sdf
       # 等价于 http://192.168.90.33:8081/demo/provider/print/sdf
     demo-consumer:
-      prefix: /api
-      path: /demo/consumer/**
+      prefix: /consumer1
+      path: /consumer1/**
       serviceId: cloud-frame-demo-consumer
-      strip-prefix: false
+      strip-prefix: true
     ucenter:
       # prefix: /ucenter
       path: /ucenter/** # 路由路径
       serviceId: ucenter
-      strip-prefix: true # 去掉前缀
+      strip-prefix: true
 #    legacy:
 #      path: /**
 
@@ -76,7 +78,10 @@ ribbon:
 ##请求连接的超时时间
   ConnectTimeout: 5000
 
-logging:
-  level:
-    ROOT: INFO
-    org.springframework.web: DEBUG
+
+# 不配置则FeignClient的callback不起作用
+feign:
+  hystrix:
+    enabled: true
+
+hystrix.command.default.execution.timeout.enabled: false

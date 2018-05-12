@@ -5,17 +5,24 @@ import com.cloud.frame.demo.auth.dao.entity.AccountInfoEntity;
 import com.cloud.frame.demo.auth.service.AccountInfoService;
 import com.cloud.frame.demo.auth.util.JwtUtils;
 import com.cloud.frame.demo.base.Result;
-import io.swagger.annotations.*;
+import io.jsonwebtoken.Claims;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by wd on 2018/5/3.
  */
 @Api(value = "权限验证", tags = {"权限验证接口"})
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/auth/token")
 public class LoginController {
 
     @Autowired
@@ -52,6 +59,19 @@ public class LoginController {
         }
     }
 
-
+    @ApiOperation("token验证")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "token", value = "token", required = true)
+    })
+    @ResponseBody
+    @GetMapping(value = "/verify", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result<Void> verify(String token) {
+        Result<Claims> claimsResult = JwtUtils.validateJWT(token, jwtConfig.getSecret());
+        Result<Void> result = Result.build();
+        result.setSuccess(claimsResult.getSuccess());
+        result.setCode(claimsResult.getCode());
+        result.setMessage(claimsResult.getMessage());
+        return result;
+    }
 
 }

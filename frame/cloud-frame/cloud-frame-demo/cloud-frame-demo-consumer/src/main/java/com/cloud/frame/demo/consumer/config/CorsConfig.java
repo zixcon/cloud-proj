@@ -1,4 +1,4 @@
-package com.cloud.frame.demo.auth.config;
+package com.cloud.frame.demo.consumer.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -7,26 +7,12 @@ import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Created by wd on 2018/5/3.
  */
 @Configuration
-//public class CorsConfig {
-public class CorsConfig implements WebMvcConfigurer {
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedHeaders("*")
-                .allowedOrigins("*")
-                .allowedMethods("GET", "PUT", "POST", "DELETE", "OPTIONS", "HEAD", "PATCH", "TRACE")
-                .allowCredentials(false)
-                .maxAge(3600);
-    }
-
+public class CorsConfig {
 
     @Bean
     public FilterRegistrationBean corsFilter() {

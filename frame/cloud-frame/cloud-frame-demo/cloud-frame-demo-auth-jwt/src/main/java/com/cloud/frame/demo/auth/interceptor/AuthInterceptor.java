@@ -7,6 +7,7 @@ import com.cloud.frame.demo.constant.AuthCodeConstant;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-import springfox.documentation.spring.web.json.Json;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +27,7 @@ import java.io.PrintWriter;
  * Created by wd on 2018/5/3.
  */
 @Component
+@Slf4j
 public class AuthInterceptor implements HandlerInterceptor {
 
     @Autowired
@@ -41,6 +41,8 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
 
+        String url = request.getRequestURI();
+        log.info("请求地址：{}", url);
         if (handler instanceof HandlerMethod) {
             return this.handleToken(request, response);
         } else {
