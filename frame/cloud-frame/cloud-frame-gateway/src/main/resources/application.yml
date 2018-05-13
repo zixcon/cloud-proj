@@ -28,6 +28,7 @@ eureka:
 
 
 zuul:
+  sensitiveHeaders: Authorization,traceId
   routes:
     demo-provider:
       path: /demo/provider/**

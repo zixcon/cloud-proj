@@ -55,3 +55,14 @@ hystrix.command.default.execution.timeout.enabled: false
 #        isolation:
 #          thread:
 #            timeoutInMilliseconds: 600000
+
+
+logging:
+  file: logs/conumer1.log
+  config: classpath:spring/logback-spring.xml
+  level:
+    com.cloud.frame.demo.consumer: DEBUG
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}] [%thread] [%X{traceId}] [%-5level] %logger{36} - %msg%n"
+
+
