@@ -25,57 +25,42 @@ eureka:
     service-url:
       defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
 
+
+
 zuul:
-  sensitiveHeaders: Authorization,traceId
-  addProxyHeaders: false
-  ignoredServices: '*'
-#  ignored-patterns: /**/auth/token/**,/**/*.html,/**/auth/register/**,/**/swagger-resources/**,/**/v2/api-docs
-#  prefix: /api
-  # strip-prefix 放这里 全局 ，放在 routes下 局部
-  # strip-prefix: false
   routes:
-    demo-provider: # 路由名称，随意，唯一即可
-      # 表示只要HTTP请求是/demo/provider开始的，就会forward到服务id为cloud-frame-demo-provider的服务上面
-      path: /demo/provider/** # 路由路径
-      serviceId: cloud-frame-demo-provider # 服务id 或者直接制定地址 http://192.168.90.33:8081
-      strip-prefix: false # 去掉前缀
-      # strip-prefix: true
-      # http://192.168.90.33:8765/api/cloud-frame-demo-provider/demo/provider/print/sdf
-      # 等价于 http://192.168.90.33:8081/demo/provider/print/sdf
-      # strip-prefix: false
-      # http://192.168.90.33:8765/api/demo/provider/print/sdf
-      # 等价于 http://192.168.90.33:8081/demo/provider/print/sdf
+    demo-provider:
+      path: /demo/provider/**
+      serviceId: cloud-frame-demo-provider
+      strip-prefix: false
     demo-consumer:
-      prefix: /consumer1
+      # prefix: /consumer1
       path: /consumer1/**
       serviceId: cloud-frame-demo-consumer
       strip-prefix: true
     ucenter:
       # prefix: /ucenter
-      path: /ucenter/** # 路由路径
+      path: /ucenter/**
       serviceId: ucenter
       strip-prefix: true
-#    legacy:
-#      path: /**
 
-demo-provider:
-  ribbon:
-    listOfServers: 192.168.90.33:8081 # 192.168.90.33:8081,192.168.90.33:8082
+# demo-provider:
+#  ribbon:
+#    listOfServers: 192.168.90.33:8081 # 192.168.90.33:8081,192.168.90.33:8082
+#
+# demo-consumer:
+#  ribbon:
+#    listOfServers: 192.168.90.33:8091 # 192.168.90.33:8091,192.168.90.33:8092
 
-demo-consumer:
-  ribbon:
-    listOfServers: 192.168.90.33:8091 # 192.168.90.33:8091,192.168.90.33:8092
-
-# 为了同时指定path 和 url，但是不破坏Zuul的Hystrix和Ribbon特性：
-ribbon:
-  eureka:
-    enabled: false # ribbon禁掉Eureka
 
 # com.netflix.zuul.exception.ZuulException: Forwarding error
 ribbon:
-##请求处理的超时时间
+# 为了同时指定path 和 url，但是不破坏Zuul的Hystrix和Ribbon特性：
+  eureka:
+    enabled: true # ribbon禁掉Eureka
+# #请求处理的超时时间
   ReadTimeout: 10000
-##请求连接的超时时间
+# #请求连接的超时时间
   ConnectTimeout: 5000
 
 
@@ -85,3 +70,4 @@ feign:
     enabled: true
 
 hystrix.command.default.execution.timeout.enabled: false
+

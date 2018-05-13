@@ -48,8 +48,8 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 // swagger2 和 zuul整合后，需要访问/v2/api-docs,这里设置了groupName 那么就需要指定/v2/api-docs?group=ucenter
                 .groupName("ucenter")
-                // swagger2 和 zuul整合后，通过zuul路由请求
-                .host("127.0.0.1:8765/ucenter")
+                // boot 2.0.1 及以前版本需要 增加 host配置，使得swagger2 和 zuul整合后，通过zuul路由请求
+                // .host("127.0.0.1:8765/ucenter")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))

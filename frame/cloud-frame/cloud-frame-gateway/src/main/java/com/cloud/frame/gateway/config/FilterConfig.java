@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfig {
 
-//    @Bean
+    @Bean
     public AuthorizationFilter authenticationFilter() {
         return new AuthorizationFilter();
     }

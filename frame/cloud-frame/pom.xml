@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.1.RELEASE</version>
+        <version>2.0.2.RELEASE</version>
         <relativePath/> <!-- lookup parent fentitytory -->
     </parent>
 
@@ -23,18 +23,18 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring.cloud.version>Finchley.RC1</spring.cloud.version>
-        <spring-boot.version>2.0.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
         <spring-boot-admin.version>1.5.7</spring-boot-admin.version>
         <security-oauth2.version>2.3.0.RELEASE</security-oauth2.version>
         <mysql.version>5.1.46</mysql.version>
         <swagger.version>2.9.0</swagger.version>
         <docker.plugin.version>0.4.12</docker.plugin.version>
         <docker.image.prefix>cloud-frame</docker.image.prefix>
-        <!--<spring-boot-admin.version>1.5.7</spring-boot-admin.version>-->
     </properties>
 
     <modules>
         <!-- 注册中心 (eureka) -->
+        <module>cloud-frame-demo</module>
         <module>cloud-frame-register</module>
         <!-- 配置中心 (config) -->
         <module>cloud-frame-config</module>
@@ -42,7 +42,6 @@
         <module>cloud-frame-gateway</module>
         <!-- 监控中心 (Turbine + Hystrix) -->
         <module>cloud-frame-monitor</module>
-        <module>cloud-frame-demo</module>
         <!-- 分布式链路日志采集中心 (zipkin) -->
         <!--<module>cloud-frame-zipkin</module>-->
     </modules>
@@ -65,6 +64,15 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- module -->
+            <dependency>
+                <groupId>com.cloud.frame.demo</groupId>
+                <artifactId>cloud-frame-demo-common-beans</artifactId>
+                <version>0.0.1</version>
+            </dependency>
+
+
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -74,41 +82,54 @@
                 <scope>import</scope>
             </dependency>
             <!-- boot admin 目前2.0版本支持不好 http://codecentric.github.io/spring-boot-admin/1.5.7/ -->
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-admin-server</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-admin-starter-server</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-admin-starter-client</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+             <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-adservicerver</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-adservicerver-ui</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-adservicerver-ui-hystrix</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-adservicerver-ui-turbine</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>de.codecentric</groupId>-->
+                <!--<artifactId>spring-boot-adservicerver-ui-login</artifactId>-->
+                <!--<version>${spring-boot-admin.version}</version>-->
+            <!--</dependency>-->
+
             <dependency>
                 <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <artifactId>spring-boot-admin-dependencies</artifactId>
                 <version>${spring-boot-admin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-admin-starter-client</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <!-- <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-adservicerver</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-adservicerver-ui</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-adservicerver-ui-hystrix</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-adservicerver-ui-turbine</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>de.codecentric</groupId>
-                <artifactId>spring-boot-adservicerver-ui-login</artifactId>
-                <version>${spring-boot-admin.version}</version>
-            </dependency>-->
 
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

@@ -3,14 +3,15 @@ package com.cloud.frame.monitor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
-import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
-import org.springframework.cloud.netflix.turbine.EnableTurbine;
 
-@EnableTurbine
-@EnableHystrix
-@EnableHystrixDashboard
+
+//@EnableTurbine
+//@EnableHystrix
+//@EnableHystrixDashboard
 @EnableDiscoveryClient
+//@ImportAutoConfiguration(classes = {de.codecentric.boot.admin.config.RevereseZuulProxyConfiguration.class})
+//@ComponentScan("de.codecentric.boot.admin")
+//@EnableAutoConfiguration(exclude = {ZuulServerAutoConfiguration.class})
 //@EnableAdminServer
 @SpringBootApplication
 public class CloudFrameMonitorApplication {

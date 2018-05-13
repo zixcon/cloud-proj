@@ -76,3 +76,17 @@
                          .globalOperationParameters(pars);
     4. Resolved exception caused by Handler execution: org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' not supported
           这个问题是zuul路由配置的问题，导致没有匹配的url请求导致的
+    
+    5. boot 2.0.1 版本
+        boot 2.0.1 及以前版本需要 增加 host配置，指定前缀ucenter进行附加，但是2.0.2版本就不需要，不然swagger2请求就会多一个ucenter请求
+        return new Docket(DocumentationType.SWAGGER_2)
+                        .groupName("ucenter")
+                        // boot 2.0.1 及以前版本需要 增加 host配置，使得swagger2 和 zuul整合后，通过zuul路由请求
+                        // .host("127.0.0.1:8765/ucenter")
+                        .apiInfo(apiInfo())
+                        .select()
+                        .apis(RequestHandlerSelectors.basePackage(basePackage))
+                        .paths(PathSelectors.any())
+                        .build()
+                        .globalOperationParameters(pars);
+    

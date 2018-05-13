@@ -7,6 +7,9 @@ spring:
       username: root
       password: 123456
       schema: classpath:db/v0.0.1.sql
+#  boot:
+#    admin:
+#      url: http://127.0.0.1:8040
 
 mybatis:
   type-aliases-package: com.cloud.frame.demo.dao.**.entity
@@ -30,4 +33,5 @@ logging:
     com.cloud.frame.demo.auth: DEBUG
   pattern:
     console: "[%d{HH:mm:ss.SSS}] [%thread] [%X{traceId}] [%-5level] %logger{36} - %msg%n"
+
 

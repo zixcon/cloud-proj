@@ -39,7 +39,7 @@ public class SwaggerConfig {
         pars.add(ticketPar.build());
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("demo-consumer")
-                .host("127.0.0.1:8765/consumer1")
+                // .host("127.0.0.1:8765/consumer1")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
