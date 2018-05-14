@@ -25,3 +25,15 @@ hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
       # 禁用Hystrix的超时时间
 #        timeout:
 #          enabled: false
+
+
+logging:
+  file: logs/provider1.log
+  config: classpath:spring/logback-spring.xml
+  level:
+    com.cloud.frame.demo.consumer: DEBUG
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}] [%thread] [%X{traceid}] [%-5level] %logger{36} - %msg%n"
+
+
+

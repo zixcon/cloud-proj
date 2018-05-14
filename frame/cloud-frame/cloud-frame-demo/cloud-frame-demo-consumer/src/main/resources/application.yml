@@ -34,6 +34,10 @@ ribbon:
 
 # 不配置则FeignClient的callback不起作用
 feign:
+#  client:
+#    config:
+#      default:
+#        requestInterceptors: com.cloud.frame.demo.consumer.interceptor.FeignRequestInterceptor
   hystrix:
     enabled: true
 
@@ -63,6 +67,6 @@ logging:
   level:
     com.cloud.frame.demo.consumer: DEBUG
   pattern:
-    console: "[%d{HH:mm:ss.SSS}] [%thread] [%X{traceId}] [%-5level] %logger{36} - %msg%n"
+    console: "[%d{HH:mm:ss.SSS}] [%thread] [%X{traceid}] [%-5level] %logger{36} - %msg%n"
 
 

@@ -1,4 +1,4 @@
-package com.cloud.frame.demo.consumer.config;
+package com.cloud.frame.demo.provider.config;
 
 import com.cloud.frame.demo.constant.LogTraceConstant;
 import com.google.common.base.Strings;

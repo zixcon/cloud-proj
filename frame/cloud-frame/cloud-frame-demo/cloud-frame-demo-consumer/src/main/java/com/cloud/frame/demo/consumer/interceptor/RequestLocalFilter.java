@@ -15,11 +15,18 @@ import java.io.IOException;
  */
 @Component
 @Slf4j
-public class AccessFilter extends OncePerRequestFilter {
+public class RequestLocalFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         log.info("请求地址：{}", request.getRequestURI());
+        RequestLocalThread.set(request);
         filterChain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        RequestLocalThread.remove();
+        super.destroy();
     }
 }

@@ -1,6 +1,8 @@
 package com.cloud.frame.gateway.filter;
 
 import com.cloud.frame.demo.base.Result;
+import com.cloud.frame.demo.constant.LogTraceConstant;
+import com.cloud.frame.demo.util.GsonUtil;
 import com.cloud.frame.gateway.client.AuthorizationClient;
 import com.google.common.base.Strings;
 import com.netflix.zuul.ZuulFilter;
@@ -12,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
 
 /**
  * Created by wd on 2018/5/10.
@@ -39,7 +45,7 @@ public class AuthorizationFilter extends ZuulFilter {
     @Override
     public int filterOrder() {
         //优先级，数字越大，优先级越低
-        return 0;
+        return PRE_DECORATION_FILTER_ORDER + 1;
     }
 
     @Override
@@ -50,19 +56,17 @@ public class AuthorizationFilter extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-        log.info("request url: {}", request.getRequestURI());
+        String traceId = ctx.getZuulRequestHeaders().get(LogTraceConstant.TRACEID);
         String authHeader = null;
         try {
+            HttpServletRequest request = ctx.getRequest();
             authHeader = request.getHeader("Authorization");
+            log.info("request url: {}, traceId:{}", request.getRequestURI(), traceId);
         } catch (Exception e) {
         }
         if (Strings.isNullOrEmpty(authHeader)) {
             ctx.setSendZuulResponse(true);
             ctx.setResponseStatusCode(200);
-//            ctx.setSendZuulResponse(false);
-//            ctx.setResponseStatusCode(401);
-//            ctx.setResponseBody("{\"success\": false,\"code\": \"4001\",\"message\": \"签名认证失败\"}");
         } else {
             Result<Void> result = authorizationClient.verify(authHeader);
             if (result.getSuccess()) {
@@ -71,7 +75,11 @@ public class AuthorizationFilter extends ZuulFilter {
             } else {
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(200);
-                ctx.setResponseBody("{\"success\": false,\"code\": \"4002\",\"message\": \"签名认证失败\"}");
+                Map<String, Object> res = new HashMap<>();
+                res.put("success", true);
+                res.put("code", 4002);
+                res.put("message", "签名认证失败");
+                ctx.setResponseBody(GsonUtil.getInstance().toJson(res));
             }
         }
         return null;

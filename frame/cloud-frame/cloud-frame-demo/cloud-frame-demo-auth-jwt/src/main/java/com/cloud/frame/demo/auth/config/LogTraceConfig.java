@@ -1,5 +1,6 @@
 package com.cloud.frame.demo.auth.config;
 
+import com.cloud.frame.demo.constant.LogTraceConstant;
 import com.google.common.base.Strings;
 import org.slf4j.MDC;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -36,12 +37,12 @@ public class LogTraceConfig {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
                 try {
-                    String traceId = (String) request.getAttribute("traceId");
+                    String traceId = request.getHeader(LogTraceConstant.TRACEID);
                     if (Strings.isNullOrEmpty(traceId)) {
                         traceId = UUID.randomUUID().toString();
-                        MDC.put("traceId", traceId);
-                        request.setAttribute("traceId", traceId);
+                        request.setAttribute(LogTraceConstant.TRACEID, traceId);
                     }
+                    MDC.put(LogTraceConstant.TRACEID, traceId);
                     filterChain.doFilter(request, response);
                 } finally {
                     MDC.clear();

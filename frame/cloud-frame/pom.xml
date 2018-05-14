@@ -28,6 +28,7 @@
         <security-oauth2.version>2.3.0.RELEASE</security-oauth2.version>
         <mysql.version>5.1.46</mysql.version>
         <swagger.version>2.9.0</swagger.version>
+        <zipkin.version>2.8.3</zipkin.version>
         <docker.plugin.version>0.4.12</docker.plugin.version>
         <docker.image.prefix>cloud-frame</docker.image.prefix>
     </properties>
@@ -243,6 +244,18 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+
+            <!-- zipkin -->
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-server</artifactId>
+                <version>${zipkin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.zipkin.java</groupId>
+                <artifactId>zipkin-autoconfigure-ui</artifactId>
+                <version>${zipkin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

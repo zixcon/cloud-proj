@@ -26,9 +26,8 @@ eureka:
       defaultZone: http://user:${REGISTRY_SERVER_PASSWORD:password}@registry:8761/eureka/
 
 
-
 zuul:
-  sensitiveHeaders: Authorization,traceId
+  sensitiveHeaders: *
   routes:
     demo-provider:
       path: /demo/provider/**
@@ -44,6 +43,7 @@ zuul:
       path: /ucenter/**
       serviceId: ucenter
       strip-prefix: true
+  ignored-patterns: *
 
 # demo-provider:
 #  ribbon:
@@ -56,18 +56,22 @@ zuul:
 
 # com.netflix.zuul.exception.ZuulException: Forwarding error
 ribbon:
-# 为了同时指定path 和 url，但是不破坏Zuul的Hystrix和Ribbon特性：
   eureka:
-    enabled: true # ribbon禁掉Eureka
-# #请求处理的超时时间
+  # 开启eureka后，才会正常通过eureka路由
+    enabled: true
+# 为了同时指定path 和 url，但是不破坏Zuul的Hystrix和Ribbon特性：enabled: false
+#    enabled: false # ribbon禁掉Eureka
   ReadTimeout: 10000
 # #请求连接的超时时间
   ConnectTimeout: 5000
+#  okhttp:
+#    enabled: true
 
 
 # 不配置则FeignClient的callback不起作用
 feign:
   hystrix:
+    # 在feign中开启hystrix功能，默认情况下feign不开启hystrix功能
     enabled: true
 
 hystrix.command.default.execution.timeout.enabled: false

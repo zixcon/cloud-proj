@@ -59,7 +59,11 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.cloud.frame.demo</groupId>
+            <artifactId>cloud-frame-demo-common-beans</artifactId>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

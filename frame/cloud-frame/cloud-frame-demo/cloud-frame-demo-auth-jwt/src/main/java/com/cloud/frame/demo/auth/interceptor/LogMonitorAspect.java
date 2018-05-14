@@ -15,14 +15,18 @@ import org.springframework.util.StopWatch;
 @Aspect
 @Component
 @Slf4j
-public class LogTraceAspect {
+public class LogMonitorAspect {
 
 
     @Pointcut("execution(* com.cloud.frame.demo.auth.service.*.*(..))")
     private void seviceLog() {
     }
 
-    @Around("seviceLog()")
+    @Pointcut("execution(* com.cloud.frame.demo.auth.api.*.*(..))")
+    private void apiLog() {
+    }
+
+    @Around("seviceLog() || apiLog()")
     public Object doSeviceLog(ProceedingJoinPoint pjp) throws Throwable {
         String method = pjp.getSignature().getDeclaringTypeName() + "." + pjp.getSignature().getName() + "()";
         StringBuilder args = new StringBuilder();

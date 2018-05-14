@@ -90,3 +90,22 @@
                         .build()
                         .globalOperationParameters(pars);
     
+    6. zuul 增加日志追踪标示traceId
+        总是无法有效传递，查看源码发现：name.toLowerCase() 全部转换为小写了
+            public void addZuulRequestHeader(String name, String value) {
+                    this.getZuulRequestHeaders().put(name.toLowerCase(), value);
+            }
+    
+    7. feign 调用微服务转发不了request请求头和参数问题解决方案
+        
+           7.1 参见FeignConfig服务,需进行装配
+           7.2 无法通过当前线程获取request对象
+                这两种都获取的为空：
+                    RequestContext ctx = RequestContext.getCurrentContext();
+                    ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+                解决办法：
+                    请求进入时放在线程中，让其当前线程和子线程都能取得，
+                    这里必须时InheritableThreadLocal，ThreadLocal去不到数据。原因是Feign走的是独立线程
+                    ThreadLocal<HttpServletRequest> REQUEST_LOCAL = new InheritableThreadLocal<>();
+                    
+                
