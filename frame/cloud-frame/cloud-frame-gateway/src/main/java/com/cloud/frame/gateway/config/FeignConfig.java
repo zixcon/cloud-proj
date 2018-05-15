@@ -29,6 +29,7 @@ public class FeignConfig {
     public RequestInterceptor requestInterceptor() {
 
         return (requestTemplate) -> {
+            log.info("组装feign请求头");
             RequestContext ctx = RequestLocalThread.get();
             if (null != ctx) {
                 Map<String, String> headers = ctx.getZuulRequestHeaders();

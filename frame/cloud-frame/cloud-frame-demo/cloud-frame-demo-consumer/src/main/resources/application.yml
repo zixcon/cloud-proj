@@ -34,11 +34,9 @@ ribbon:
 
 # 不配置则FeignClient的callback不起作用
 feign:
-#  client:
-#    config:
-#      default:
-#        requestInterceptors: com.cloud.frame.demo.consumer.interceptor.FeignRequestInterceptor
   hystrix:
+    enabled: true
+  okhttp:
     enabled: true
 
 hystrix.command.default.execution.timeout.enabled: false

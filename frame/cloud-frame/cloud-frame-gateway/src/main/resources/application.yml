@@ -27,23 +27,24 @@ eureka:
 
 
 zuul:
-  sensitiveHeaders: *
+# zuul.ignored-patterns： 这里的值表示不走下面所有的routes
+#  ignored-patterns: /**/auth/token/**, /**/auth/register/**,/**/*.html,/**/v2/api-docs,
+#  sensitiveHeaders: *
   routes:
     demo-provider:
       path: /demo/provider/**
       serviceId: cloud-frame-demo-provider
       strip-prefix: false
     demo-consumer:
-      # prefix: /consumer1
       path: /consumer1/**
       serviceId: cloud-frame-demo-consumer
       strip-prefix: true
     ucenter:
-      # prefix: /ucenter
       path: /ucenter/**
       serviceId: ucenter
       strip-prefix: true
-  ignored-patterns: *
+#      ignored-patterns: .*\/auth\/token\/.*, .*\/auth\/register\/.*,.*\.html,.*\/v2\/api-docs
+      ignored-patterns: /**/auth/token/**,/**/auth/register/**,/**/*.html,/**/v2/api-docs
 
 # demo-provider:
 #  ribbon:
@@ -73,6 +74,19 @@ feign:
   hystrix:
     # 在feign中开启hystrix功能，默认情况下feign不开启hystrix功能
     enabled: true
+  okhttp:
+    enabled: true
+
 
 hystrix.command.default.execution.timeout.enabled: false
+
+
+logging:
+  file: logs/gateway.log
+  config: classpath:spring/logback-spring.xml
+  level:
+    com.cloud.frame.gateway: DEBUG
+  pattern:
+    console: "[%d{HH:mm:ss.SSS}] [%thread] [%X{traceid}] [%-5level] %logger{36} - %msg%n"
+
 

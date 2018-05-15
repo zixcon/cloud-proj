@@ -17,6 +17,13 @@
         
         增加swagger2配置类
         
+4. AntPathMatcher
+    
+        url路径匹配：
+        ? 匹配1个字符
+        * 匹配0个或多个字符
+        ** 匹配路径中的0个或多个目录
+        
 整合失败问题解读：
     
     1. 访问失败：WARN：Unable to find specification for group

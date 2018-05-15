@@ -11,11 +11,16 @@ import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.util.AntPathMatcher;
+import org.springframework.util.PathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
 
@@ -25,6 +30,11 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
 public class AuthorizationFilter extends ZuulFilter {
 
     private static Logger log = LoggerFactory.getLogger(AuthorizationFilter.class);
+
+    @Value("${zuul.routes.ucenter.ignored-patterns}")
+    private String ignorePatterns;
+
+    private static final PathMatcher pathMatcher = new AntPathMatcher();
 
     @Autowired
     private AuthorizationClient authorizationClient;
@@ -50,6 +60,17 @@ public class AuthorizationFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
+        if (!Strings.isNullOrEmpty(ignorePatterns)) {
+            RequestContext ctx = RequestContext.getCurrentContext();
+            String[] ignoreArr = ignorePatterns.split(",");
+            String uri = ctx.getRequest().getRequestURI();
+            for (String pattern : ignoreArr) {
+                if(this.pathMatcher.match(pattern, uri)) {
+                    return false;
+                }
+            }
+
+        }
         return true;
     }
 
@@ -65,8 +86,13 @@ public class AuthorizationFilter extends ZuulFilter {
         } catch (Exception e) {
         }
         if (Strings.isNullOrEmpty(authHeader)) {
-            ctx.setSendZuulResponse(true);
+            ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(200);
+            Map<String, Object> res = new HashMap<>();
+            res.put("success", true);
+            res.put("code", 4001);
+            res.put("message", "无token签名");
+            ctx.setResponseBody(GsonUtil.getInstance().toJson(res));
         } else {
             Result<Void> result = authorizationClient.verify(authHeader);
             if (result.getSuccess()) {
