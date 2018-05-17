@@ -1,7 +1,9 @@
 package com.cloud.frame.demo.consumer.config;
 
+import com.google.common.collect.Sets;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -41,6 +43,7 @@ public class SwaggerConfig {
                 .groupName("demo-consumer")
                 // .host("127.0.0.1:8765/consumer1")
                 .apiInfo(apiInfo())
+                .produces(Sets.newHashSet(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())

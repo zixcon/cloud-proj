@@ -18,9 +18,13 @@ mybatis:
 
 jwt:
   header: Authorization
-  secret: yoursecret
-  expiration: 604800
   tokenHead: Bearer
+  accessSecret: 708513fba0aa792334e8
+  # 10分钟
+  accessExpiration: 600000
+  refreshSecret: 7fe697edc17be85d4bc3
+  # 7天
+  refreshExpiration: 604800000
 
 logging:
   # 如果只配置 logging.file ，会在项目的当前路径下生成一个 xxx.log 日志文件。

@@ -95,8 +95,8 @@ public class JwtUtils {
         String sc = createJWT("1", "小明", secert, 3000);
         System.out.println(sc);
         System.out.println(validateJWT(sc, secert).getCode());
-        System.out.println(validateJWT(sc, secert).getBody().getId());
         //Thread.sleep(3000);
         System.out.println(validateJWT(sc, secert).getBody());
+        System.out.println(validateJWT(sc, secert).getBody().getId());
     }
 }

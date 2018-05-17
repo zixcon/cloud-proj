@@ -1,9 +1,12 @@
 package com.cloud.frame.demo.auth.config;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -51,6 +54,7 @@ public class SwaggerConfig {
                 // boot 2.0.1 及以前版本需要 增加 host配置，使得swagger2 和 zuul整合后，通过zuul路由请求
                 // .host("127.0.0.1:8765/ucenter")
                 .apiInfo(apiInfo())
+                .produces(Sets.newHashSet(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())

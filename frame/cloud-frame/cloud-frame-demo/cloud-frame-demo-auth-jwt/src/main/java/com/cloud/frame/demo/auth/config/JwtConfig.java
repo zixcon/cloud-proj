@@ -11,21 +11,32 @@ public class JwtConfig {
 
     @Value("${jwt.header}")
     private String header;
-    @Value("${jwt.secret}")
-    private String secret;
-    @Value("${jwt.expiration}")
-    private String expiration;
+    @Value("${jwt.accessSecret}")
+    private String accessSecret;
+    @Value("${jwt.accessExpiration}")
+    private String accessExpiration;
+    @Value("${jwt.refreshSecret}")
+    private String refreshSecret;
+    @Value("${jwt.refreshExpiration}")
+    private String refreshExpiration;
 
     public String getHeader() {
         return header;
     }
 
-    public String getSecret() {
-        return secret;
+    public String getAccessSecret() {
+        return accessSecret;
     }
 
-    public String getExpiration() {
-        return expiration;
+    public String getAccessExpiration() {
+        return accessExpiration;
     }
 
+    public String getRefreshSecret() {
+        return refreshSecret;
+    }
+
+    public String getRefreshExpiration() {
+        return refreshExpiration;
+    }
 }

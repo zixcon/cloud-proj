@@ -18,6 +18,10 @@ public class AccountInfoService {
     @Autowired
     private AccountInfoEntityMapper accountInfoEntityMapper;
 
+    public AccountInfoEntity getEntity(Integer id) {
+        return accountInfoEntityMapper.selectByPrimaryKey(id);
+    }
+
     public AccountInfoEntity getEntity(String username) {
         AccountInfoEntityExample example = new AccountInfoEntityExample();
         AccountInfoEntityExample.Criteria criteria = example.createCriteria();

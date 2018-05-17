@@ -167,6 +167,17 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.cloud</groupId>-->
+                <!--<artifactId>spring-cloud-netflix-eureka-server</artifactId>-->
+                <!--<exclusions>-->
+                    <!--<exclusion>-->
+                        <!--<groupId>com.fasterxml.jackson.dataformat</groupId>-->
+                        <!--<artifactId>jackson-dataformat-xml</artifactId>-->
+                    <!--</exclusion>-->
+                <!--</exclusions>-->
+            <!--</dependency>-->
+
             <dependency>
                 <groupId>org.springframework.security.oauth</groupId>
                 <artifactId>spring-security-oauth2</artifactId>

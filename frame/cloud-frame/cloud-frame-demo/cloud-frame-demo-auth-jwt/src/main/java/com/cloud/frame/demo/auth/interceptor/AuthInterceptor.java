@@ -1,6 +1,7 @@
 package com.cloud.frame.demo.auth.interceptor;
 
 import com.cloud.frame.demo.auth.config.JwtConfig;
+import com.cloud.frame.demo.auth.service.AuthorizationService;
 import com.cloud.frame.demo.auth.util.JwtUtils;
 import com.cloud.frame.demo.base.Result;
 import com.cloud.frame.demo.constant.AuthCodeConstant;
@@ -32,6 +33,11 @@ public class AuthInterceptor implements HandlerInterceptor {
 
     @Autowired
     private JwtConfig jwtConfig;
+
+    @Autowired
+    private AuthorizationService authorizationService;
+
+
     private static final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
@@ -82,11 +88,10 @@ public class AuthInterceptor implements HandlerInterceptor {
     }
 
     private boolean handleToken(HttpServletRequest request, HttpServletResponse response) {
-        Result<Void> result = Result.build();
-        result.setSuccess(false);
-        String authHeader;
+        Result<Void> result;
+        String token;
         try {
-            authHeader = request.getHeader(jwtConfig.getHeader());
+            token = request.getHeader(jwtConfig.getHeader());
         } catch (Exception e) {
             logger.error("验证失败", e);
             result = Result.build();
@@ -96,42 +101,12 @@ public class AuthInterceptor implements HandlerInterceptor {
             print(response, result);
             return false;
         }
-        if (StringUtils.isEmpty(authHeader)) {
-            logger.info("验证失败");
-            result.setSuccess(false);
-            result.setCode(AuthCodeConstant.JWT_ERRCODE_NULL + "");
-            result.setMessage("签名验证不存在");
+        result = authorizationService.authorization(token);
+        if (result.getSuccess()) {
+            return true;
+        } else {
             print(response, result);
             return false;
-        } else {
-            //验证JWT的签名，返回CheckResult对象
-            Result<Claims> checkResult = JwtUtils.validateJWT(authHeader, jwtConfig.getSecret());
-            if (checkResult.getSuccess()) {
-                return true;
-            } else {
-                int code = Integer.valueOf(checkResult.getCode());
-                switch (code) {
-                    // 签名验证不通过
-                    case AuthCodeConstant.JWT_ERRCODE_FAIL:
-                        logger.info("签名验证不通过");
-                        result.setSuccess(false);
-                        result.setCode(checkResult.getCode() + "");
-                        result.setMessage("签名验证不通过");
-                        print(response, result);
-                        break;
-                    // 签名过期，返回过期提示码
-                    case AuthCodeConstant.JWT_ERRCODE_EXPIRE:
-                        logger.info("签名过期");
-                        result.setSuccess(false);
-                        result.setCode(checkResult.getCode() + "");
-                        result.setMessage("签名过期");
-                        print(response, result);
-                        break;
-                    default:
-                        break;
-                }
-                return false;
-            }
         }
     }
 }

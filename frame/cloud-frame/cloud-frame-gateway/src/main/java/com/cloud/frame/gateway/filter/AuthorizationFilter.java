@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.http.MediaType;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
@@ -86,6 +87,8 @@ public class AuthorizationFilter extends ZuulFilter {
         } catch (Exception e) {
         }
         if (Strings.isNullOrEmpty(authHeader)) {
+            //MediaType.APPLICATION_JSON_UTF8_VALUE
+            ctx.getResponse().setContentType("text/html;charset=UTF-8");
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(200);
             Map<String, Object> res = new HashMap<>();
@@ -99,6 +102,7 @@ public class AuthorizationFilter extends ZuulFilter {
                 ctx.setSendZuulResponse(true);
                 ctx.setResponseStatusCode(200);
             } else {
+                ctx.getResponse().setContentType("text/html;charset=UTF-8");
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(200);
                 Map<String, Object> res = new HashMap<>();
