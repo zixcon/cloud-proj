@@ -3,6 +3,7 @@ package com.cloud.frame.demo.auth.service;
 import com.cloud.frame.demo.auth.dao.entity.AccountInfoEntity;
 import com.cloud.frame.demo.auth.dao.entity.AccountInfoEntityExample;
 import com.cloud.frame.demo.auth.dao.mapper.AccountInfoEntityMapper;
+import com.cloud.frame.demo.auth.util.ShiroUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -38,6 +39,18 @@ public class AccountInfoService {
         entity.setUserName(username);
         entity.setSalt("salt");
         entity.setPassword(password);
+        String salt = ShiroUtils.salt();
+//        entity.setSalt(salt);
+//        entity.setPassword(ShiroUtils.md5Hash(password, salt));
+        accountInfoEntityMapper.insertSelective(entity);
+    }
+
+    public void register2(String username, String password) {
+        AccountInfoEntity entity = new AccountInfoEntity();
+        entity.setUserName(username);
+        String salt = ShiroUtils.salt();
+        entity.setSalt(salt);
+        entity.setPassword(ShiroUtils.md5Hash(password, username + salt));
         accountInfoEntityMapper.insertSelective(entity);
     }
 }

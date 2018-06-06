@@ -37,16 +37,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
      *
      * @param registry
      */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        String[] patterns = new String[]{"/auth/token/*", "/auth/register/**",
-                "/*.html",
-                "/swagger-resources/**", "/v2/api-docs",
-                };
-        registry.addInterceptor(authInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns(patterns);
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        String[] patterns = new String[]{"/auth/token/*", "/auth/register/**","/auth/shiro/*",
+//                "/*.html",
+//                "/swagger-resources/**", "/v2/api-docs",
+//                };
+//        registry.addInterceptor(authInterceptor)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns(patterns);
+//    }
 
     /**
      * 添加swagger

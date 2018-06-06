@@ -37,13 +37,21 @@ public class RegisterController {
     }
 
 
-    @ApiOperation("用户注册")
+    @ApiOperation("appid用户注册")
     @ResponseBody
-    @RequestMapping(value = "/user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Result<Void> userRegister(String username, String password) {
+    @RequestMapping(value = "/appid/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result<Void> userRegister1(String username, String password) {
         Result<Void> result = Result.build();
         accountInfoService.register(username, password);
         return result;
     }
 
+    @ApiOperation("user用户注册")
+    @ResponseBody
+    @RequestMapping(value = "/user/add", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public Result<Void> userRegister2(String username, String password) {
+        Result<Void> result = Result.build();
+        accountInfoService.register2(username, password);
+        return result;
+    }
 }

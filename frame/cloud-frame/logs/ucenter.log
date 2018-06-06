@@ -1,7 +1,0 @@
-[2018-05-17 00:09:57.471] [HikariPool-1 housekeeper] [] [WARN ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h11s921ms).
-[2018-05-17 02:10:11.729] [HikariPool-1 housekeeper] [] [WARN ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h14s90ms).
-[2018-05-17 04:10:25.474] [HikariPool-1 housekeeper] [] [WARN ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h13s914ms).
-[2018-05-17 06:10:43.585] [HikariPool-1 housekeeper] [] [WARN ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h18s111ms).
-[2018-05-17 07:10:28.456] [HikariPool-1 housekeeper] [] [WARN ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=59m44s871ms).
-[2018-05-17 08:12:56.711] [HikariPool-1 housekeeper] [] [WARN ] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h2m27s423ms).
-[2018-05-17 08:13:39.881] [AsyncResolver-bootstrap-executor-0] [] [INFO ] c.n.d.s.r.aws.ConfigClusterResolver - Resolving eureka endpoints via configuration

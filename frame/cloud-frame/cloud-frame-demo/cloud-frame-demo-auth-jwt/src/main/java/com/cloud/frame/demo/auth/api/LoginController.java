@@ -5,6 +5,7 @@ import com.cloud.frame.demo.auth.dao.entity.AccountInfoEntity;
 import com.cloud.frame.demo.auth.dto.AuthToken;
 import com.cloud.frame.demo.auth.service.AccountInfoService;
 import com.cloud.frame.demo.auth.service.AuthorizationService;
+import com.cloud.frame.demo.auth.util.ShiroUtils;
 import com.cloud.frame.demo.base.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -45,6 +46,8 @@ public class LoginController {
         result.setSuccess(false);
         AccountInfoEntity user = accountInfoService.getEntity(username);
         if (user != null) {
+//            String userPass = ShiroUtils.md5Hash(user.getPassword(), user.getSalt());
+//            if (userPass.equals(password)) {
             if (user.getPassword().equals(password)) {
                 // 把token返回给客户端-->客户端保存至cookie-->客户端每次请求附带token参数
                 AuthToken authToken = authorizationService.handleAuthToken(user);

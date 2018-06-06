@@ -44,7 +44,7 @@ zuul:
       serviceId: ucenter
       strip-prefix: true
 #      ignored-patterns: .*\/auth\/token\/.*, .*\/auth\/register\/.*,.*\.html,.*\/v2\/api-docs
-      ignored-patterns: /**/auth/token/**,/**/auth/register/**,/**/*.html,/**/v2/api-docs
+      ignored-patterns: /**/auth/shiro/**,/**/auth/token/**,/**/auth/register/**,/**/*.html,/**/v2/api-docs
 
 # demo-provider:
 #  ribbon:

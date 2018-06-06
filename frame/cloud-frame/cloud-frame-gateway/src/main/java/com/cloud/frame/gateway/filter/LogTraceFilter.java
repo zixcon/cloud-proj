@@ -11,6 +11,7 @@ import org.slf4j.MDC;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.http.HttpStatus;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 import static org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_DECORATION_FILTER_ORDER;
@@ -40,11 +41,15 @@ public class LogTraceFilter extends ZuulFilter {
     @Override
     public Object run() throws ZuulException {
         RequestContext ctx = RequestContext.getCurrentContext();
+        HttpServletRequest request = ctx.getRequest();
         String traceId = ctx.getZuulRequestHeaders().get(LogTraceConstant.TRACEID);
         if (Strings.isNullOrEmpty(traceId)) {
             traceId = UUID.randomUUID().toString();
         }
         ctx.addZuulRequestHeader(LogTraceConstant.TRACEID, traceId);
+        String token = request.getHeader("Authorization");
+        ctx.addZuulRequestHeader(LogTraceConstant.TRACEID, traceId);
+        ctx.addZuulRequestHeader("Authorization", token);
         RequestLocalThread.set(ctx);
         // 对该请求进行路由
         ctx.setSendZuulResponse(true);
